@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Container untuk menyatukan tombol kembali dan gambar -->
+    <FrameLayout
+        android:id="@+id/back_with_logo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true">
+
+        <!-- Gambar logo -->
+        <ImageView
+            android:id="@+id/top_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sampokong"
+            android:contentDescription="majapahit" />
+
+        <!-- Tombol panah kembali -->
+        <TextView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="←"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_gravity="start|top"
+            android:padding="8dp"
+            android:contentDescription="Back Button" />
+    </FrameLayout>
+
+    <!-- Tombol Lihat Lokasi di kiri bawah logo -->
+    <Button
+        android:id="@+id/btn_lihat_lokasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/back_with_logo"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:text="Lihat Lokasi"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_green_dark" />
+
+    <!-- Deskripsi di bawah tombol -->
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_lihat_lokasi"
+        android:layout_margin="16dp"
+        android:text="Sam Poo Kong, klenteng tertua di Semarang, didirikan sebagai penghormatan kepada Laksamana Cheng Ho, penjelajah Muslim asal Tiongkok. Dengan arsitektur Tionghoa yang khas, klenteng ini tidak hanya menjadi tempat peribadatan, tetapi juga destinasi wisata budaya. Sebagai simbol perdamaian dan keragaman, Sam Poo Kong menjadi salah satu ikon bersejarah di Semarang."
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="4dp"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center" />
+
+
+</RelativeLayout>

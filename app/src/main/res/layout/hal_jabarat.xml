@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow_bright_transparent"
+    android:padding="16dp">
+
+    <!-- Tombol Kembali Berbentuk Panah di Kiri -->
+    <TextView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="←"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:padding="8dp"
+        android:layout_marginTop="-4dp"
+        android:contentDescription="Back Button" />
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="wijah"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Kolom Pencarian -->
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cari tempat..."
+        android:background="@drawable/search_background"
+        android:padding="10dp"
+        android:layout_below="@id/title_text"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="8dp"
+        android:inputType="text" />
+
+    <!-- Container untuk foto dan teks di bawahnya -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/search_bar"
+        android:layout_marginTop="32dp">
+
+        <!-- Baris pertama dengan 2 foto -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Foto pertama -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/btn_gedung_sate"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_margin="8dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/gedung_sate"
+                    android:contentDescription="Photo 1"
+                    android:clickable="true"
+                    android:background="@drawable/gedung_sate"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/name_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gedung sate"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- Foto kedua -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/btn_konferensi"
+                    android:layout_width="116dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/museum_konferensi"
+                    android:clickable="true"
+                    android:contentDescription="Photo 2"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/museum_konferensi" />
+
+                <TextView
+                    android:id="@+id/name_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Museum konferensi"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Baris kedua dengan 2 foto -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <!-- Foto ketiga -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/btn_monumen"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_margin="8dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/monumen_jawa_barat"
+                    android:contentDescription="Photo 3"
+                    android:clickable="true"
+                    android:background="@drawable/monumen_jawa_barat"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/name_kidal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monumen Perjuangan"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- Foto keempat -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/btn_saung"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_margin="8dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/saung_angklung"
+                    android:contentDescription="Photo 4"
+                    android:clickable="true"
+                    android:background="@drawable/saung_angklung"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/name_trowulan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Angklung udjo"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Baris ketiga dengan 2 foto -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <!-- Foto kelima -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/btn_geologi"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_margin="8dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/museum_geologi"
+                    android:contentDescription="Photo 5"
+                    android:clickable="true"
+                    android:background="@drawable/museum_geologi"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/name_kediri"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Museum Geologi"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- Foto keenam -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/btn_kesepuhan"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_margin="8dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/keraton_kasepuhan"
+                    android:contentDescription="Photo 6"
+                    android:clickable="true"
+                    android:background="@drawable/keraton_kasepuhan"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/name_jayabaya"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Keraton Kesepuhan"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

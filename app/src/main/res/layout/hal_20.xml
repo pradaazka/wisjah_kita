@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Container untuk menyatukan tombol kembali dan gambar -->
+    <FrameLayout
+        android:id="@+id/back_with_logo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true">
+
+        <!-- Gambar logo -->
+        <ImageView
+            android:id="@+id/top_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/museum_geologi"
+            android:contentDescription="majapahit" />
+
+        <!-- Tombol panah kembali -->
+        <TextView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="←"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_gravity="start|top"
+            android:padding="8dp"
+            android:contentDescription="Back Button" />
+    </FrameLayout>
+
+    <!-- Tombol Lihat Lokasi di kiri bawah logo -->
+    <Button
+        android:id="@+id/btn_lihat_lokasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/back_with_logo"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:text="Lihat Lokasi"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_green_dark" />
+
+    <!-- Deskripsi di bawah tombol -->
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_lihat_lokasi"
+        android:layout_margin="16dp"
+        android:text="Museum Geologi Bandung, yang didirikan pada tahun 1928, memiliki koleksi batuan, mineral, fosil, dan artefak geologi dari berbagai daerah di Indonesia. Museum ini juga memberikan pemahaman tentang sejarah evolusi bumi dan manusia. Menjadi destinasi edukatif yang menarik, Museum Geologi Bandung sangat cocok untuk wisatawan yang tertarik dengan ilmu geologi dan sejarah alam."
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:lineSpacingExtra="4dp"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center" />
+
+
+</RelativeLayout>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "778006673068",
+    "project_id": "wisjah-e90ed",
+    "storage_bucket": "wisjah-e90ed.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778006673068:android:b96abf659c7e436105d109",
+        "android_client_info": {
+          "package_name": "prada.wijah"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdbfHnd0U3WXD44EAHWZLSIoEZaEWgS3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
