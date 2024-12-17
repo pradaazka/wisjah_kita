@@ -96,7 +96,7 @@
                 android:layout_margin="8dp"
                 android:background="@null"
                 android:scaleType="centerCrop"
-                android:src="@drawable/lawang_sewu_semarang"
+                android:src="@drawable/kota_lama_semarang"
                 android:contentDescription="Foto Lokasi 2" />
 
             <ImageButton
@@ -106,7 +106,7 @@
                 android:layout_margin="8dp"
                 android:background="@null"
                 android:scaleType="centerCrop"
-                android:src="@drawable/lawang_sewu_semarang"
+                android:src="@drawable/sampokong"
                 android:contentDescription="Foto Lokasi 3" />
 
         </LinearLayout>

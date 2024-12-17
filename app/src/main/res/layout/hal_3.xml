@@ -82,7 +82,7 @@
                     android:id="@+id/name_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pantai Kute Barat"
+                    android:text="Candi singosari"
                     android:layout_marginTop="8dp"
                     android:textSize="16sp"
                     android:gravity="center" />
@@ -113,7 +113,7 @@
                     android:id="@+id/name_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="candi kidal"
+                    android:text="candi Panataran"
                     android:layout_marginTop="8dp"
                     android:textSize="16sp"
                     android:gravity="center" />
@@ -182,7 +182,7 @@
                     android:id="@+id/name_trowulan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Candi Trowulan"
+                    android:text="Museum Sepuluh N "
                     android:layout_marginTop="8dp"
                     android:textSize="16sp"
                     android:gravity="center" />
@@ -221,7 +221,7 @@
                     android:id="@+id/name_kediri"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Candi Kediri"
+                    android:text="Makan bung karno"
                     android:layout_marginTop="8dp"
                     android:textSize="16sp"
                     android:gravity="center" />
@@ -251,7 +251,7 @@
                     android:id="@+id/name_jayabaya"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Candi Jayabaya"
+                    android:text="Museum majapahit"
                     android:layout_marginTop="8dp"
                     android:textSize="16sp"
                     android:gravity="center" />

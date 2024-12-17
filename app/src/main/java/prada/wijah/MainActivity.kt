@@ -221,7 +221,7 @@ class MainActivity : ComponentActivity() {
                                 onSampokongClick = { currentScreen = "hal_12" }, // Navigasi ke sampokong
                                 onAgungClick = { currentScreen = "hal_13" }, // Navigasi ke agung
                                 onGedungClick = { currentScreen = "hal_14" }, // Navigasi ke gedung
-                                onkeratonClick = { currentScreen = "hal_15" }, // Navigasi ke gedung
+                                onKeratonClick = { currentScreen = "hal_15" }, // Navigasi ke gedung
                                 onKampungClick = { currentScreen = "hal_jatengah" }, // Navigasi ke kampung
                                 onPustakaClick = { currentScreen = "hal_jatengah" }, // Navigasi ke pustaka
                                 onBentengClick = { currentScreen = "hal_jatengah" } // Navigasi ke benteng
@@ -293,70 +293,80 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ShowHal3Layout(
     modifier: Modifier = Modifier,
-    onSingosariClick: () -> Unit, // Callback untuk tombol_singosari
-    onBackClick: () -> Unit, // Callback untuk tombol kembali
-    onPanataranClick: () -> Unit, // Callback untuk tombol_panataran
-    onKidalClick: () -> Unit, // Callback untuk tombol_kidal
-    onMuseumClick: () -> Unit, // Callback untuk tombol_museum
-    onMakamClick: () -> Unit, // Callback untuk tombol_makam
-    onMajapahitClick: () -> Unit // Callback untuk tombol_majapahit
+    onSingosariClick: () -> Unit,
+    onBackClick: () -> Unit,
+    onPanataranClick: () -> Unit,
+    onKidalClick: () -> Unit,
+    onMuseumClick: () -> Unit,
+    onMakamClick: () -> Unit,
+    onMajapahitClick: () -> Unit
 ) {
     AndroidView(
         factory = { context ->
-            val view = LayoutInflater.from(context).inflate(R.layout.hal_3, null)
+            LayoutInflater.from(context).inflate(R.layout.hal_3, null).apply {
+                val searchBar: AutoCompleteTextView = findViewById(R.id.search_bar)
 
-            // Temukan ImageView untuk btn_singosari, btn_panataran, btn_kidal, btn_museum, btn_makam, dan btn_majapahit
-            val btnSingosari: ImageView = view.findViewById(R.id.btn_singosari)
-            val btnPanataran: ImageView = view.findViewById(R.id.btn_panataran)
-            val btnKidal: ImageView = view.findViewById(R.id.btn_kidal)
-            val btnMuseum: ImageView = view.findViewById(R.id.btn_museum) // Tombol museum
-            val btnMakam: ImageView = view.findViewById(R.id.btn_makam) // Tombol makam
-            val btnMajapahit: ImageView = view.findViewById(R.id.btn_majapahit) // Tombol majapahit
-            val backButton: TextView = view.findViewById(R.id.back_button) // Tombol kembali
+                // Mapping lokasi berdasarkan ID dan teks
+                val locationButtons = mapOf(
+                    "candi singosari" to findViewById<TextView>(R.id.btn_singosari),
+                    "candi panataran" to findViewById<TextView>(R.id.btn_panataran),
+                    "candi kidal" to findViewById<TextView>(R.id.btn_kidal),
+                    "museum sepuluh n" to findViewById<TextView>(R.id.btn_museum),
+                    "makan bung karno" to findViewById<TextView>(R.id.btn_makam),
+                    "museum majapahit" to findViewById<TextView>(R.id.btn_majapahit)
+                )
 
-            // Tombol btn_singosari
-            btnSingosari.setOnClickListener {
-                onSingosariClick() // Panggil callback untuk btn_singosari (menuju hal_4)
+                val places = locationButtons.keys.toList()
+
+                // Sembunyikan semua tombol lokasi
+                fun resetVisibility() {
+                    locationButtons.values.forEach { it.visibility = View.GONE }
+                }
+
+                // Adapter untuk AutoCompleteTextView
+                val adapter = ArrayAdapter(context, android.R.layout.simple_dropdown_item_1line, places)
+                searchBar.setAdapter(adapter)
+
+                // Aksi ketika item dipilih dari saran
+                searchBar.setOnItemClickListener { _, _, position, _ ->
+                    val query = adapter.getItem(position)?.lowercase()
+                    resetVisibility() // Sembunyikan semua lokasi
+                    query?.let {
+                        locationButtons[it]?.visibility = View.VISIBLE
+                    }
+                }
+
+                // Aksi ketika tombol Enter ditekan
+                searchBar.setOnEditorActionListener { _, actionId, _ ->
+                    if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE) {
+                        val query = searchBar.text.toString().trim().lowercase()
+                        resetVisibility() // Sembunyikan semua lokasi
+                        if (locationButtons.containsKey(query)) {
+                            locationButtons[query]?.visibility = View.VISIBLE
+                        } else {
+                            Toast.makeText(context, "Lokasi tidak ditemukan", Toast.LENGTH_SHORT).show()
+                        }
+                        true
+                    } else {
+                        false
+                    }
+                }
+
+                // Aksi tombol lokasi
+                locationButtons["candi singosari"]?.setOnClickListener { onSingosariClick() }
+                locationButtons["candi panataran"]?.setOnClickListener { onPanataranClick() }
+                locationButtons["candi kidal"]?.setOnClickListener { onKidalClick() }
+                locationButtons["museum sepuluh n"]?.setOnClickListener { onMuseumClick() }
+                locationButtons["makan bung karno"]?.setOnClickListener { onMakamClick() }
+                locationButtons["museum majapahit"]?.setOnClickListener { onMajapahitClick() }
+
+                // Tombol kembali
+                findViewById<TextView>(R.id.back_button).setOnClickListener { onBackClick() }
             }
-
-            // Tombol btn_panataran
-            btnPanataran.setOnClickListener {
-                onPanataranClick() // Panggil callback untuk btn_panataran (menuju hal_5)
-            }
-
-            // Tombol btn_kidal
-            btnKidal.setOnClickListener {
-                onKidalClick() // Panggil callback untuk btn_kidal (menuju hal_6)
-            }
-
-            // Tombol btn_museum
-            btnMuseum.setOnClickListener {
-                onMuseumClick() // Panggil callback untuk btn_museum
-            }
-
-            // Tombol btn_makam
-            btnMakam.setOnClickListener {
-                onMakamClick() // Panggil callback untuk btn_makam
-            }
-
-            // Tombol btn_majapahit
-            btnMajapahit.setOnClickListener {
-                onMajapahitClick() // Panggil callback untuk btn_majapahit
-            }
-
-            // Tombol kembali
-            backButton.setOnClickListener {
-                onBackClick() // Panggil callback untuk kembali
-            }
-
-            // Pastikan view dapat dilihat sepenuhnya
-            view
         },
         modifier = modifier.fillMaxSize()
     )
 }
-
-
 
 @Composable
 fun ShowRegisterLayout(modifier: Modifier = Modifier, onRegisterClick: () -> Unit) {
@@ -524,7 +534,7 @@ fun ShowHal1Layout(modifier: Modifier = Modifier, onStartClick: (String) -> Unit
 @Composable
 fun ShowHaljatimLayout(
     modifier: Modifier = Modifier,
-    onLocationClick: (Int) -> Unit, // Parameter untuk lokasi spesifik
+    onLocationClick: (Int) -> Unit,
     onBackClick: () -> Unit,
     onProfileClick: () -> Unit
 ) {
@@ -533,56 +543,36 @@ fun ShowHaljatimLayout(
             LayoutInflater.from(context).inflate(R.layout.hal_jatim, null).apply {
                 val searchBar: AutoCompleteTextView = findViewById(R.id.search_bar)
 
-                // Data untuk pencarian (misalnya nama candi)
-                val places = listOf(
-                    "Singosari", "Panataran", "Kidal", "Museum", "Makam", "Majapahit"
+                val locationButtons = mapOf(
+                    "singosari" to findViewById<TextView>(R.id.btn_singosari),
+                    "panataran" to findViewById<TextView>(R.id.btn_panataran),
+                    "kidal" to findViewById<TextView>(R.id.btn_kidal),
+                    "museum" to findViewById<TextView>(R.id.btn_museum),
+                    "makam" to findViewById<TextView>(R.id.btn_makam),
+                    "majapahit" to findViewById<TextView>(R.id.btn_majapahit)
                 )
+
+                val places = locationButtons.keys.toList()
+
+                // Menyembunyikan semua lokasi terlebih dahulu
+                fun resetVisibility() {
+                    locationButtons.values.forEach { it.visibility = View.GONE }
+                }
 
                 // Membuat ArrayAdapter untuk AutoCompleteTextView
                 val adapter = ArrayAdapter(context, android.R.layout.simple_dropdown_item_1line, places)
                 searchBar.setAdapter(adapter)
 
-                // Menambahkan TextWatcher untuk mengupdate pencarian
-                searchBar.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {}
-
-                    override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
-                        // Filter hasil pencarian berdasarkan inputan
-                        adapter.filter.filter(charSequence)
-                    }
-
-                    override fun afterTextChanged(editable: Editable?) {}
-                })
-
-                // Menambahkan aksi ketika pengguna menekan tombol Enter
+                // Aksi ketika tombol Enter ditekan
                 searchBar.setOnEditorActionListener { _, actionId, _ ->
                     if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE) {
-                        val query = searchBar.text.toString().trim()
+                        val query = searchBar.text.toString().trim().lowercase()
+                        resetVisibility() // Sembunyikan semua lokasi
 
-                        // Mengecek teks yang dimasukkan dan menampilkan sesuai dengan pencarian
-                        when (query.lowercase()) {
-                            "singosari" -> {
-                                findViewById<TextView>(R.id.btn_singosari).visibility = View.VISIBLE
-                            }
-                            "panataran" -> {
-                                findViewById<TextView>(R.id.btn_panataran).visibility = View.VISIBLE
-                            }
-                            "kidal" -> {
-                                findViewById<TextView>(R.id.btn_kidal).visibility = View.VISIBLE
-                            }
-                            "museum" -> {
-                                findViewById<TextView>(R.id.btn_museum).visibility = View.VISIBLE
-                            }
-                            "makam" -> {
-                                findViewById<TextView>(R.id.btn_makam).visibility = View.VISIBLE
-                            }
-                            "majapahit" -> {
-                                findViewById<TextView>(R.id.btn_majapahit).visibility = View.VISIBLE
-                            }
-                            else -> {
-                                // Jika tidak ditemukan, sembunyikan semua TextView atau tampilkan pesan
-                                Toast.makeText(context, "Lokasi tidak ditemukan", Toast.LENGTH_SHORT).show()
-                            }
+                        if (locationButtons.containsKey(query)) {
+                            locationButtons[query]?.visibility = View.VISIBLE
+                        } else {
+                            Toast.makeText(context, "Lokasi tidak ditemukan", Toast.LENGTH_SHORT).show()
                         }
                         true
                     } else {
@@ -590,19 +580,16 @@ fun ShowHaljatimLayout(
                     }
                 }
 
-                // Menambahkan klik listener untuk lokasi
+                // Menambahkan aksi klik lokasi
                 findViewById<ImageButton>(R.id.btn_location1).setOnClickListener { onLocationClick(1) }
                 findViewById<ImageButton>(R.id.btn_location2).setOnClickListener { onLocationClick(2) }
                 findViewById<ImageButton>(R.id.btn_location3).setOnClickListener { onLocationClick(3) }
 
-                findViewById<TextView>(R.id.btn_singosari).setOnClickListener { onLocationClick(4) }
-                findViewById<TextView>(R.id.btn_panataran).setOnClickListener { onLocationClick(5) }
-                findViewById<TextView>(R.id.btn_kidal).setOnClickListener { onLocationClick(6) }
-                findViewById<TextView>(R.id.btn_museum).setOnClickListener { onLocationClick(7) }
-                findViewById<TextView>(R.id.btn_makam).setOnClickListener { onLocationClick(8) }
-                findViewById<TextView>(R.id.btn_majapahit).setOnClickListener { onLocationClick(9) }
+                locationButtons.forEach { (key, button) ->
+                    button.setOnClickListener { onLocationClick(places.indexOf(key) + 4) }
+                }
 
-                // Menambahkan listener untuk back button dan profile button
+                // Back dan Profile button
                 findViewById<TextView>(R.id.back_button).setOnClickListener { onBackClick() }
                 findViewById<ImageButton>(R.id.btn_profile).setOnClickListener { onProfileClick() }
             }
@@ -610,7 +597,6 @@ fun ShowHaljatimLayout(
         modifier = modifier.fillMaxSize()
     )
 }
-
 
 
 @Composable
@@ -776,7 +762,7 @@ fun ShowHaljatengLayout(
     onSampokongClick: () -> Unit, // Klik untuk btn_sampokong
     onAgungClick: () -> Unit, // Klik untuk btn_agung
     onGedungClick: () -> Unit, // Klik untuk btn_gedung
-    onkeratonClick: () -> Unit, // Klik untuk btn_gedung
+    onKeratonClick: () -> Unit, // Klik untuk btn_keraton
     onKampungClick: () -> Unit, // Klik untuk btn_kampung
     onPustakaClick: () -> Unit, // Klik untuk btn_pustaka
     onBentengClick: () -> Unit // Klik untuk btn_benteng
@@ -784,34 +770,79 @@ fun ShowHaljatengLayout(
     AndroidView(
         factory = { context ->
             LayoutInflater.from(context).inflate(R.layout.hal_jateng, null).apply {
-                // Tombol ImageButton untuk lokasi 1, 2, dan 3
+                val searchBar: AutoCompleteTextView = findViewById(R.id.search_bar)
+
+                val locationButtons = mapOf(
+                    "lawang" to findViewById<TextView>(R.id.btn_lawang),
+                    "kota" to findViewById<TextView>(R.id.btn_kota),
+                    "sampokong" to findViewById<TextView>(R.id.btn_sampokong),
+                    "agung" to findViewById<TextView>(R.id.btn_agung),
+                    "gedung" to findViewById<TextView>(R.id.btn_gedung),
+                    "keraton" to findViewById<TextView>(R.id.btn_keraton),
+                    "kampung" to findViewById<TextView>(R.id.btn_kampung),
+                    "pustaka" to findViewById<TextView>(R.id.btn_pustaka),
+                    "benteng" to findViewById<TextView>(R.id.btn_benteng)
+                )
+
+                val places = locationButtons.keys.toList()
+
+                // Menyembunyikan semua lokasi terlebih dahulu
+                fun resetVisibility() {
+                    locationButtons.values.forEach { it.visibility = View.GONE }
+                }
+
+                // Membuat ArrayAdapter untuk AutoCompleteTextView
+                val adapter = ArrayAdapter(context, android.R.layout.simple_dropdown_item_1line, places)
+                searchBar.setAdapter(adapter)
+
+                // Aksi ketika tombol Enter ditekan
+                searchBar.setOnEditorActionListener { _, actionId, _ ->
+                    if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE) {
+                        val query = searchBar.text.toString().trim().lowercase()
+                        resetVisibility() // Sembunyikan semua lokasi
+
+                        if (locationButtons.containsKey(query)) {
+                            locationButtons[query]?.visibility = View.VISIBLE
+                        } else {
+                            Toast.makeText(context, "Lokasi tidak ditemukan", Toast.LENGTH_SHORT).show()
+                        }
+                        true
+                    } else {
+                        false
+                    }
+                }
+
+                // Menambahkan klik listener untuk tombol lokasi lainnya
                 findViewById<ImageButton>(R.id.btn_location1).setOnClickListener { onLocationClick(1) }
                 findViewById<ImageButton>(R.id.btn_location2).setOnClickListener { onLocationClick(2) }
                 findViewById<ImageButton>(R.id.btn_location3).setOnClickListener { onLocationClick(3) }
 
+                // Menambahkan aksi klik untuk lokasi
+                locationButtons.forEach { (key, button) ->
+                    button.setOnClickListener {
+                        when (key) {
+                            "lawang" -> onLawangClick()
+                            "kota" -> onKotaClick()
+                            "sampokong" -> onSampokongClick()
+                            "agung" -> onAgungClick()
+                            "gedung" -> onGedungClick()
+                            "keraton" -> onKeratonClick()
+                            "kampung" -> onKampungClick()
+                            "pustaka" -> onPustakaClick()
+                            "benteng" -> onBentengClick()
+                        }
+                    }
+                }
+
                 // Tombol untuk kembali dan profil
                 findViewById<TextView>(R.id.back_button).setOnClickListener { onBackClick() }
                 findViewById<ImageButton>(R.id.btn_profile).setOnClickListener { onProfileClick() }
-
-                // Tombol btn_lawang mengarah ke hal_jatengah
-                findViewById<TextView>(R.id.btn_lawang).setOnClickListener { onLawangClick() }
-
-                // Tombol btn_kota mengarah ke hal_jatengah
-                findViewById<TextView>(R.id.btn_kota).setOnClickListener { onKotaClick() }
-
-                // Tombol baru untuk lokasi lainnya
-                findViewById<TextView>(R.id.btn_sampokong).setOnClickListener { onSampokongClick() }
-                findViewById<TextView>(R.id.btn_agung).setOnClickListener { onAgungClick() }
-                findViewById<TextView>(R.id.btn_gedung).setOnClickListener { onGedungClick() }
-                findViewById<TextView>(R.id.btn_keraton).setOnClickListener { onGedungClick() }
-                findViewById<TextView>(R.id.btn_kampung).setOnClickListener { onKampungClick() }
-                findViewById<TextView>(R.id.btn_pustaka).setOnClickListener { onPustakaClick() }
-                findViewById<TextView>(R.id.btn_benteng).setOnClickListener { onBentengClick() }
             }
         },
         modifier = modifier.fillMaxSize()
     )
 }
+
 
 
 @Composable
@@ -1051,20 +1082,71 @@ fun ShowHaljabarLayout(
     AndroidView(
         factory = { context ->
             LayoutInflater.from(context).inflate(R.layout.hal_jabar, null).apply {
+                val searchBar: AutoCompleteTextView = findViewById(R.id.search_bar)
+
+                val locationButtons = mapOf(
+                    "gedung" to findViewById<TextView>(R.id.btn_gedung),
+                    "konferensi" to findViewById<TextView>(R.id.btn_konferensi),
+                    "monumen" to findViewById<TextView>(R.id.btn_monumen),
+                    "saung" to findViewById<TextView>(R.id.btn_saung),
+                    "geologi" to findViewById<TextView>(R.id.btn_geologi),
+                    "keraton" to findViewById<TextView>(R.id.btn_keraton),
+                    "kanoman" to findViewById<TextView>(R.id.btn_kanoman),
+                    "goa" to findViewById<TextView>(R.id.btn_goa),
+                    "masjid" to findViewById<TextView>(R.id.btn_masjid)
+                )
+
+                val places = locationButtons.keys.toList()
+
+                // Menyembunyikan semua lokasi terlebih dahulu
+                fun resetVisibility() {
+                    locationButtons.values.forEach { it.visibility = View.GONE }
+                }
+
+                // Membuat ArrayAdapter untuk AutoCompleteTextView
+                val adapter = ArrayAdapter(context, android.R.layout.simple_dropdown_item_1line, places)
+                searchBar.setAdapter(adapter)
+
+                // Aksi ketika tombol Enter ditekan
+                searchBar.setOnEditorActionListener { _, actionId, _ ->
+                    if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE) {
+                        val query = searchBar.text.toString().trim().lowercase()
+                        resetVisibility() // Sembunyikan semua lokasi
+
+                        if (locationButtons.containsKey(query)) {
+                            locationButtons[query]?.visibility = View.VISIBLE
+                        } else {
+                            Toast.makeText(context, "Lokasi tidak ditemukan", Toast.LENGTH_SHORT).show()
+                        }
+                        true
+                    } else {
+                        false
+                    }
+                }
+
+                // Menambahkan klik listener untuk tombol lokasi lainnya
                 findViewById<ImageButton>(R.id.btn_location1).setOnClickListener { onLocationClick(1) }
                 findViewById<ImageButton>(R.id.btn_location2).setOnClickListener { onLocationClick(2) }
                 findViewById<ImageButton>(R.id.btn_location3).setOnClickListener { onLocationClick(3) }
 
-                findViewById<TextView>(R.id.btn_gedung).setOnClickListener { onLocationClick(4) }
-                findViewById<TextView>(R.id.btn_konferensi).setOnClickListener { onLocationClick(5) }
-                findViewById<TextView>(R.id.btn_monumen).setOnClickListener { onLocationClick(6) }
-                findViewById<TextView>(R.id.btn_saung).setOnClickListener { onLocationClick(7) }
-                findViewById<TextView>(R.id.btn_geologi).setOnClickListener { onLocationClick(8) }
-                findViewById<TextView>(R.id.btn_keraton).setOnClickListener { onLocationClick(9) }
-                findViewById<TextView>(R.id.btn_kanoman).setOnClickListener { onLocationClick(10) }
-                findViewById<TextView>(R.id.btn_goa).setOnClickListener { onLocationClick(11) }
-                findViewById<TextView>(R.id.btn_masjid).setOnClickListener { onLocationClick(12) }
+                // Menambahkan aksi klik untuk lokasi
+                locationButtons.forEach { (key, button) ->
+                    button.setOnClickListener {
+                        when (key) {
+                            "gedung" -> onLocationClick(4)
+                            "konferensi" -> onLocationClick(5)
+                            "monumen" -> onLocationClick(6)
+                            "saung" -> onLocationClick(7)
+                            "geologi" -> onLocationClick(8)
+                            "keraton" -> onLocationClick(9)
+                            "kanoman" -> onLocationClick(10)
+                            "goa" -> onLocationClick(11)
+                            "masjid" -> onLocationClick(12)
+                        }
+                    }
+                }
 
+                // Tombol untuk kembali dan profil
                 findViewById<TextView>(R.id.back_button).setOnClickListener { onBackClick() }
                 findViewById<ImageButton>(R.id.btn_profile).setOnClickListener { onProfileClick() }
             }
