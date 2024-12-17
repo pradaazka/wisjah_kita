@@ -216,12 +216,12 @@ class MainActivity : ComponentActivity() {
                                 onLocationClick = { currentScreen = "hal_jatengah" },
                                 onBackClick = { currentScreen = "hal_1" },
                                 onProfileClick = { currentScreen = "profile" },
-                                onLawangClick = { currentScreen = "hal_jatengah" },
-                                onKotaClick = { currentScreen = "hal_jatengah" }, // Tombol btn_kota juga mengarah ke hal_jatengah
-                                onSampokongClick = { currentScreen = "hal_jatengah" }, // Navigasi ke sampokong
-                                onAgungClick = { currentScreen = "hal_jatengah" }, // Navigasi ke agung
-                                onGedungClick = { currentScreen = "hal_jatengah" }, // Navigasi ke gedung
-                                onkeratonClick = { currentScreen = "hal_jatengah" }, // Navigasi ke gedung
+                                onLawangClick = { currentScreen = "hal_10" },
+                                onKotaClick = { currentScreen = "hal_11" }, // Tombol btn_kota juga mengarah ke hal_jatengah
+                                onSampokongClick = { currentScreen = "hal_12" }, // Navigasi ke sampokong
+                                onAgungClick = { currentScreen = "hal_13" }, // Navigasi ke agung
+                                onGedungClick = { currentScreen = "hal_14" }, // Navigasi ke gedung
+                                onkeratonClick = { currentScreen = "hal_15" }, // Navigasi ke gedung
                                 onKampungClick = { currentScreen = "hal_jatengah" }, // Navigasi ke kampung
                                 onPustakaClick = { currentScreen = "hal_jatengah" }, // Navigasi ke pustaka
                                 onBentengClick = { currentScreen = "hal_jatengah" } // Navigasi ke benteng
